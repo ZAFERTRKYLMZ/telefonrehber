@@ -1,0 +1,116 @@
+﻿@model IEnumerable<telefonrehber.Models.kisi>
+
+@{
+    ViewData["Title"] = "Index";
+    List<kisi> listecik = new List<kisi>();
+}
+
+
+<script src="~/js/site.js"></script>
+<body class="bg-dark">
+    <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh; flex-direction: column;">
+        <div class="mx-auto offset-md-3 col-md-6 d-flex justify-content-center">
+            <div class="d-flex justify-content-between d-flex align-items-center">
+                <form class="d-flex align-items-center" style="width: 400px;">
+                    <input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0 mx-2" id="search-button" type="button">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="mx-auto offset-md-3 col-md-5 justify-content-center d-flex pt-5">
+            <div class="d-flex align-items-md-center">
+                <div class="d-flex">
+                    <div>
+                        <h3 class="text-white">Ad Soyad</h3>
+                        <div class="col-lg mx-2">
+                            <ul class="list-group" id="list-group" style="width: 200px;">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="list-group-item" style="height:55px;">
+                                        <span class="name">@Html.DisplayFor(modelItem => item.ad)</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-white">TEL NO</h3>
+                        <div class="col-lg mx-2">
+                            <ul class="list-group" id="phone-list-group" style="width: 200px;">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="list-group-item text-end mx-3" style="width:200px;">
+                                        <button asp-controller="kisis" asp-action="Delete" asp-route-id="@item.id" class='btn btn-danger'>
+                                            <a asp-controller="kisis" asp-action="Delete" asp-route-id="@item.id">delete</a>
+                                        </button>
+                                        <span class="phone">@Html.DisplayFor(modelItem => item.telefon)</span>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-5">
+            <button type="button" class="btn btn-outline-primary">
+                <a asp-area="" asp-controller="SearchHistory" asp-action="Index">Privacy</a>
+                </button>
+            <button type="button" class="btn btn-outline-success">
+                <a asp-action="Create">Create New</a>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function search() {
+            var input, filter, nameList, phoneList, nameItems, phoneItems, i, nameValue, phoneValue;
+            input = document.getElementById('search-input');
+            filter = input.value.toUpperCase();
+            nameList = document.getElementById("list-group");
+            phoneList = document.getElementById("phone-list-group");
+            nameItems = nameList.getElementsByTagName('li');
+            phoneItems = phoneList.getElementsByTagName('li');
+
+            for (i = 0; i < nameItems.length; i++) {
+                nameValue = nameItems[i].getElementsByClassName("name")[0].innerText.toUpperCase();
+                phoneValue = phoneItems[i].getElementsByClassName("phone")[0].innerText.toUpperCase();
+                if (nameValue.indexOf(filter) > -1 || phoneValue.indexOf(filter) > -1) {
+                    nameItems[i].style.display = "";
+                    phoneItems[i].style.display = "";
+                } else {
+                    nameItems[i].style.display = "none";
+                    phoneItems[i].style.display = "none";
+                }
+            }
+
+            let data = {
+                keyword: input.value
+            };
+            fetch("https://localhost:7012/SearchHistory/Add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+        }
+
+        document.getElementById('search-button').addEventListener('click', search);
+    </script>
+    <script>
+      
+                $("#searchInput").autocomplete({
+                source: function (request, response) {
+                $.ajax({
+                });
+                url: @Url.Action("GetSearchValue", "Home")', dataType: "json",
+                data: search: $("#searchInput").val() }, success: function (data) {
+                },
+                response($.map(data, function (item) { return {label:item.Name, value:item.Name}|
+                }));
+                error: function (xhr, status, error) { alert("Error");
+    </script>
+</body> 
