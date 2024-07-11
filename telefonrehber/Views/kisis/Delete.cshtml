@@ -1,8 +1,16 @@
 ﻿@model telefonrehber.Models.kisi
+<<<<<<< HEAD
 @{
     ViewData["Title"] = "Delete";
 }
 <body class="bg-dark text-light">
+=======
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+>>>>>>> 961afc2caab843f24c758815fd033a436f69f418
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -27,8 +35,14 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
+<<<<<<< HEAD
         <button asp-action="Index" class="btn btn-primary">Back to List</button>
         @* <a asp-action="Index">Back to List</a> *@
     </form>
 </div>
 </body>
+=======
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+>>>>>>> 961afc2caab843f24c758815fd033a436f69f418

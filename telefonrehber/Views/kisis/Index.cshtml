@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+<<<<<<< HEAD
     List<kisi> listecik = new List<kisi>();
 }
 
@@ -114,3 +115,110 @@
                 error: function (xhr, status, error) { alert("Error");
     </script>
 </body> 
+=======
+}
+
+@* <h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefon)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefon)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table> *@
+<script src="~/js/site.js"></script>
+ <body class="bg-dark" onload="listele()">
+        
+        <div class="container-fluid d-flex align-items-center justify-content-center " style="height: 100vh; flex-direction: column;">
+        <div class=" mx-auto offset-md-3 col-md-6 d-flex justify-content-center">
+        <div class="d-flex justify-content-between  d-flex align-items-center" >
+            <form class=" d-flex align-items-center" style="width: 400px;">
+                <input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mx-2" id="search-button" onclick="search()" type="button">Search</button>
+            </form>
+        </div>
+        </div>
+
+    <div class="mx-auto offset-md-3 col-md-5 justify-content-center d-flex pt-5 ">
+        <div class="d-flex align-items-md-center">
+            <div class="d-flex">
+                <div>
+                    <h3 class="text-white">Ad Soyad</h3>
+            <div class="col-lg mx-2 ">
+                <ul class="list-group"  style="width: 200px;">
+                                @foreach (var item in Model)
+
+                                {
+
+                                    <li class="list-group-item">  @Html.DisplayFor(modelItem => item.ad)</li>
+
+                                }
+                </ul>
+            </div>
+        </div>
+            <div>
+                <h3 class="text-white">TEL NO</h3>
+            <div class="col-lg mx-2">
+                <ul class="list-group" style="width: 200px;">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="list-group-item">
+
+                                        @Html.DisplayFor(modelItem => item.telefon)
+
+                                    </li>
+                                }
+                    
+                </ul>
+            </div>
+    </div>
+    </div>
+
+        </div>
+    </div>
+    <div class="pt-5">
+           
+
+                <button type="button" class="btn btn-outline-success"> <a asp-action="Create">Create New</a></button>
+                <button type="button" class="btn btn-outline-warning">   <a asp-action="Edit">Edit</a> </button>
+                <button type="button" class="btn btn-outline-danger"><a asp-action="Delete" >Delete</a></button>
+                <button type="button" class="btn btn-outline-primary"> <a asp-action="Details">Details</a> |</button>
+            
+    </div>
+    
+    </div>
+    
+    </div>
+    </div>
+   <script>
+      
+   </script>
+    </body>
+>>>>>>> 961afc2caab843f24c758815fd033a436f69f418

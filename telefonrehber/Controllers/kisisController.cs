@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using telefonrehber.Data;
 using telefonrehber.Models;
@@ -29,8 +34,6 @@ namespace telefonrehber.Controllers
         private readonly AppDbContext _context;
          private readonly IHttpContextAccessor _httpContextAccessor;
 
-      
-        public kisisController(AppDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
@@ -43,7 +46,23 @@ namespace telefonrehber.Controllers
             return View(await _context.kisiler.ToListAsync());
         }
 
- 
+        // GET: kisis/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var kisi = await _context.kisiler
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (kisi == null)
+            {
+                return NotFound();
+            }
+
+            return View(kisi);
+        }
 
         // GET: kisis/Create
         public IActionResult Create()
@@ -164,6 +183,6 @@ namespace telefonrehber.Controllers
       
 
     
-}
+    }
 }
 
